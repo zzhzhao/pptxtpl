@@ -2,6 +2,7 @@
 #-*- coding:utf-8 -*-
 import re
 import copy
+import slide_copy
 
 
 from pptx import Presentation, parts
@@ -528,6 +529,16 @@ class PPTXTemplate(object):
 
         return dest
 
+    def duplicate_slide_with_chart(self, source_id, target_index):
+        """
+        复制带有统计图的幻灯片，但是目前仅仅在wps 2023上实验成功
+        :param source_id:
+        :param target_index:
+        :return:
+        """
+        slide_copy.duplicate_slide(self.presentation, source_id)
+
+        self.move_slide(source_id + 1, target_index)
 
 
     def save(self, save_path):
